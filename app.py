@@ -66,11 +66,6 @@ def contact():
         message = request.form.get("message")
 
         try:
-            # Save to database
-            entry = Contact(name=name, email=email, subject=subject, message=message)
-            db.session.add(entry)
-            db.session.commit()
-
             # Send admin email
             mail.send_message(
                 subject=f'New message from {name}',
@@ -88,6 +83,10 @@ def contact():
             )
 
             print("✅ Email sent and data saved.")
+            print(f"Sending email to: {email}")
+            print(f"Subject: {subject}")
+            print(f"Message: {message}")
+
 
         except Exception as e:
             print(f"❌ Error: {e}")
